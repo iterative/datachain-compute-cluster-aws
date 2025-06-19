@@ -19,3 +19,9 @@ variable "storage_buckets" {
     "example-bucket",
   ]
 }
+
+variable "secrets" {
+  default = [
+    "arn:aws:secretsmanager:us-east-1:000000000000:secret:example-secret/test-abcdef",
+  ]
+}
