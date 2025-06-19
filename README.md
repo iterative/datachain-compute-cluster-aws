@@ -39,6 +39,11 @@
 
 DataChain Studio is split into 2 main components:
 
+* Control Plane — typically hosted by us as a fully managed service
+* Compute & Data Plane — typically hosted on your cloud accounts
+
+Compute resources will be provisioned through managed Kubernetes clusters we automatically deploy on your account, using the permissions described in this repository.
+
 # Guidance
 
 # Granting Access to AWS Secrets in DataChain Studio Jobs
