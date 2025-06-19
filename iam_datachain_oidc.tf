@@ -82,6 +82,15 @@ data "aws_iam_policy_document" "datachain_oidc_storage" {
       ]
     ])
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret"
+    ]
+    resources = var.secrets
+  }
 }
 
 data "aws_iam_policy_document" "datachain_oidc_compute_assume_role" {
