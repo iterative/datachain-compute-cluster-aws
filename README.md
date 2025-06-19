@@ -43,3 +43,33 @@ DataChain Studio is split into 2 main components:
 * Compute & Data Plane — typically hosted on your cloud accounts
 
 Compute resources will be provisioned through managed Kubernetes clusters we automatically deploy on your account, using the permissions described in this repository.
+
+# Guidance
+
+# Granting Access to AWS Secrets in DataChain Studio Jobs
+
+You can securely inject sensitive configuration (such as tokens, passwords, or private URLs) into your compute jobs by referencing AWS Secrets Manager secrets through environment variables. This avoids hardcoding credentials and allows fine-grained secret management.
+
+## How to Use
+
+1. **Create a JSON Secret in AWS Secrets Manager**
+
+   Store your secret as a JSON object. For example:
+
+   ```json
+   {
+     "EXAMPLE_SECRET": "your-secret-value-or-url"
+   }
+   ```
+
+2. **Set an Environment Variable in the Studio Job Settings**
+
+   In DataChain Studio, configure your job with an environment variable that references the secret using the special `aws://` syntax:
+
+   ```
+   EXAMPLE_SECRET=aws://arn:aws:secretsmanager:us-east-1:000000000000:secret:example-secret/test-abcdef#EXAMPLE_SECRET
+   ```
+
+   - Replace `arn:aws:secretsmanager:us-east-1:000000000000:secret:example-secret/test-abcdef` with the full ARN of your secret.
+   - The part after the `#` (e.g., `#EXAMPLE_SECRET`) refers to the key in your JSON secret.
+   - Add the full ARN of your secret to `variables.tf`
